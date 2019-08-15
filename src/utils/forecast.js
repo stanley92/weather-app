@@ -13,15 +13,18 @@ const forecast = (latitude, longitude, callback) => {
         } else {
             const weatherData = body;
             const { temperature, precipProbability } = weatherData.currently;
-            const { summary } = weatherData.daily;
 
-            // console.log(temperature);
-            // console.log(precipProbability);
-            // console.log(summary + ' It is currently ' + temperature + ' degrees out. There is a ' + precipProbability + '% chance of rain.');
+            console.log(weatherData.daily);
+
+            const { summary } = weatherData.daily;
+            const { temperatureHigh, temperatureLow } = weatherData.daily.data[0];
+
             callback(null, {
-                temperature: temperature,
-                precipProbability: precipProbability,
-                message: summary + ' It is currently ' + temperature + ' degrees out. There is a ' + precipProbability + '% chance of rain.'
+                temperature,
+                precipProbability,
+                temperatureHigh,
+                temperatureLow,
+                message: summary + ' It is currently ' + temperature + ' degrees out. The high today is ' + temperatureHigh + ' and the low is ' + temperatureLow + '. There is a ' + precipProbability + '% chance of rain.'
             });
         }
     });
